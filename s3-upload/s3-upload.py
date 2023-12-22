@@ -164,15 +164,16 @@ class S3Uploader:
 
     def write_result(self, outfn):
         outfh = open(outfn, "w")
-        headers = ["file_name"]
-        headers.append("file_size")
-        headers.append("s3_url")
-        headers.append("presigned_url")
-        headers.append("create_date")
-        headers.append("expiry_date")
+        headers = ["File_name"]
+        headers.append("File_size(Bytes)")
+        headers.append("S3_url")
+        headers.append("Presigned_url")
+        headers.append("Create_date")
+        headers.append("Expiry_date")
         outfh.write("{0}\n".format("\t".join(headers)))
         for file_name, info_dic in self.meta_dic.items():
-            items = [file_name]
+            items = [info_dic["object_name"]]
+            items.append(f"{info_dic['size']:,}")
             items.append(f"s3://{info_dic['bucket_name']}/{info_dic['object_name']}")
             items.append(info_dic["presigned_url"])
             items.append(info_dic["create_date"])
