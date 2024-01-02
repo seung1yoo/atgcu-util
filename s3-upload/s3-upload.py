@@ -194,8 +194,8 @@ def main(args):
 if __name__=="__main__":
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument("--infn", default="atgcu-util.s3-upload.input.csv")
-    parser.add_argument("--outprefix", default="atgcu-util.s3-upload")
+    parser.add_argument("--infn", default="data/atgcu-util.s3-upload.input.csv")
+    parser.add_argument("--outprefix", default="data/atgcu-util.s3-upload")
     args = parser.parse_args()
     main(args)
 
