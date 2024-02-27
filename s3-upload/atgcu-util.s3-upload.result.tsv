@@ -1,0 +1,2 @@
+File_name	File_size(Bytes)	S3_url	Presigned_url	Create_date	Expiry_date
+upload-test-file.txt	63	s3://presigned-url-test-siyoo-240226/upload-test-file.txt	https://presigned-url-test-siyoo-240226.s3.amazonaws.com/upload-test-file.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQ2FH6WBFB3RE2ZW7%2F20240227%2Fap-northeast-2%2Fs3%2Faws4_request&X-Amz-Date=20240227T054513Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=f436d7823a809270794a56650bc3803553ce84b20b44255fe59d0821e7521f46	2024-02-27 02:45:13 PM	2024-03-05 02:45:13 PM

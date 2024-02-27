@@ -13,6 +13,7 @@ from pathlib import Path
 from time import time
 from time import localtime
 from time import strftime
+region_id = "ap-northeast-2"
 
 class ProgressPercentage(object):
     def __init__(self, filename):
@@ -79,9 +80,9 @@ class S3Uploader:
         sys.stdout.write("\n")
         logging.info(f"Uploading the file is in progress to bucket.")
         logging.info(f" -> source file : {file_name}")
-        logging.info(f" -> target bucket : info_dic['bucket_name']")
+        logging.info(f" -> target bucket : {info_dic['bucket_name']}")
 
-        s3_client = boto3.client('s3')
+        s3_client = boto3.client("s3", region_name=region_id)
 
         # find legacy buckets in my s3
         bucket_name = info_dic["bucket_name"]
@@ -124,7 +125,6 @@ class S3Uploader:
         return False
 
     def create_bucket(self, bucket_name):
-        region_id = "ap-northeast-2"
         s3_client = boto3.client("s3", region_name=region_id)
         location = {'LocationConstraint': region_id}
         s3_client.create_bucket(Bucket=bucket_name, CreateBucketConfiguration=location)
@@ -132,11 +132,12 @@ class S3Uploader:
         return True
 
     def create_presigned_url(self, file_name, info_dic, expiration=604800):
+        # --expires-in
 
         logging.info(f"create presigned url for {file_name}")
 
         # create presigned url
-        s3_client = boto3.client('s3')
+        s3_client = boto3.client("s3", region_name=region_id)
         try:
             response = s3_client.generate_presigned_url(
                 'get_object',
@@ -146,6 +147,7 @@ class S3Uploader:
             )
         except ClientError as e:
             logging.error(e)
+            sys.exit()
             return False
 
         # add presigned url to meta_dic
@@ -160,7 +162,7 @@ class S3Uploader:
         somedate = strftime('%Y-%m-%d %I:%M:%S %p', tm)
         self.meta_dic[file_name].setdefault("expiry_date", somedate)
 
-        return True
+        return response
 
     def write_result(self, outfn):
         outfh = open(outfn, "w")
@@ -186,7 +188,13 @@ def main(args):
     obj = S3Uploader(args.infn)
     for file_name, info_dic in obj.meta_dic.items():
         obj.upload_to_bucket(file_name, info_dic)
-        obj.create_presigned_url(file_name, info_dic)
+        result = obj.create_presigned_url(file_name, info_dic)
+        if result:
+            logging.info(f"Presigned URL : {file_name} --> {result}")
+        else:
+            logging.error("Error in create presigned url")
+            sys.exit()
+
     obj.write_result(f"{args.outprefix}.result.tsv")
 
 
@@ -194,8 +202,18 @@ def main(args):
 if __name__=="__main__":
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument("--infn", default="data/atgcu-util.s3-upload.input.csv")
-    parser.add_argument("--outprefix", default="data/atgcu-util.s3-upload")
+    parser.add_argument("--infn",
+                        default="atgcu-util.s3-upload.input.csv",
+                        help="""
+    1st column is file_path ; specify target file path to upload.
+    2nd column is bucket_name ; bucket name must follow the rules.
+      | example : glc2401001-siyoo-24012901
+      | startswith "glc" lower
+      | use only '-'
+      | https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
+    """
+    )
+    parser.add_argument("--outprefix", default="atgcu-util.s3-upload")
     args = parser.parse_args()
     main(args)
 
