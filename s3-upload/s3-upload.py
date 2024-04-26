@@ -6,6 +6,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 import boto3
 from botocore.exceptions import ClientError
+from botocore.config import Config
 import os
 import sys
 import threading
@@ -137,10 +138,14 @@ class S3Uploader:
         logging.info(f"create presigned url for {file_name}")
 
         # create presigned url
-        s3_client = boto3.client("s3", region_name=region_id)
+        s3_client = boto3.client("s3",
+                                 region_name=region_id,
+                                 config=Config(s3={'addressing_style': 'path'},
+                                               signature_version='s3v4')
+                                 )
         try:
             response = s3_client.generate_presigned_url(
-                'get_object',
+                ClientMethod='get_object',
                 Params={'Bucket': info_dic["bucket_name"],
                         'Key': info_dic["object_name"]},
                 ExpiresIn=expiration
