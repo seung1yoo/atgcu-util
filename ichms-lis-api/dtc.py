@@ -34,7 +34,7 @@ def parse_genotype_file(plate_barcode, file_path, result_dir):
 
 def main():
     parser = argparse.ArgumentParser(description='Parse genotype TSV file to JSON format.')
-    parser.add_argument('--plate-barcode', type=str, help='Plate barcode', default='TESTD4')
+    parser.add_argument('--plate-barcode', type=str, help='Plate barcode', default='TESTD3')
     parser.add_argument('--file-path', type=Path, help='Path to the genotype TSV file',
                         default=Path('dtc-data/DTC_API_TEST_4.genotype.xls'))
     parser.add_argument('--result-dir', type=Path, help='Result directory', default=Path('dtc-data'))
