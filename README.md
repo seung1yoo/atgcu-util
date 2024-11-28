@@ -23,3 +23,23 @@ python s3-upload.py --infn data/atgcu-util.s3-upload.input.csv --outprefix atgcu
 ```
 
 
+## iCHMS LIS API
+
+### For DTC 
+```shell
+python dtc.py \
+  --plate-barcode 1234567890 \
+  --file-path dtc-data/20241128/1234567890.xls \
+  --result-dir dtc-data/20241128 \
+  --config-file dtc-data/config.json
+```
+
+### For IRS
+```shell
+python irs.py \
+  --plate-barcode 1234567890 \
+  --source irs-data/20241128/1234567890.xls \
+  --action post \
+  --limit-n 0 \
+  --config-file irs-data/config.json
+```
