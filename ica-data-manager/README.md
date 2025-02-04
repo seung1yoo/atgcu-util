@@ -27,9 +27,36 @@ pip install ica-data-manager
   - 이미 다운로드된 파일은 자동으로 건너뜀 (파일 크기 비교)
   - 다운로드 진행 상황 실시간 출력
 
-## 사용 예시
+## 사용 방법
 
-### 프로젝트 목록 조회
+### 명령행 인터페이스 (CLI)
+
+패키지 설치 후 `ica-manager` 명령어를 사용할 수 있습니다.
+
+```bash
+# 도움말 보기
+ica-manager --help
+
+# 프로젝트 목록 조회
+ica-manager projects list
+ica-manager projects list --details  # 상세 정보 표시
+
+# 프로젝트 데이터 목록 조회
+ica-manager data list --project-id <PROJECT_ID>
+ica-manager data list --project-id <PROJECT_ID> --path /sequencing_data/
+ica-manager data list --project-id <PROJECT_ID> --path /sequencing_data/ --details
+
+# FASTQ 파일 다운로드
+ica-manager data download-fastq \
+    --project-id <PROJECT_ID> \
+    --path /sequencing_data/ \
+    --output-dir ./fastq_files \
+    --workers 4
+```
+
+### Python API
+
+#### 프로젝트 목록 조회
 ```python
 from ica_data_manager import ProjectManager
 
@@ -47,7 +74,7 @@ manager.display_projects(projects)
 # ...
 ```
 
-### FASTQ 파일 다운로드
+#### FASTQ 파일 다운로드
 ```python
 from ica_data_manager import DataManager
 

@@ -13,7 +13,13 @@ setup(
         "biopython>=1.80",      # For biological sequence handling
         "icav2",                # ICA v2 CLI
         "tabulate>=0.9.0",      # For table formatting
+        "click>=8.0.0",         # For CLI interface
     ],
+    entry_points={
+        'console_scripts': [
+            'ica-manager=ica_data_manager.cli:cli',
+        ],
+    },
     author="ATGCU",
     author_email="your.email@example.com",
     description="ICA (Illumina Connected Analytics) Data Management Package",
