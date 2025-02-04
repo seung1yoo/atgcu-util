@@ -86,18 +86,18 @@ class DataManager:
             return [
                 ProjectData(
                     id=item['id'],
-                    name=item['name'],
-                    data_type=item['dataType'],
-                    path=item['path'],
-                    file_size=item.get('fileSizeInBytes', 0),
-                    format=item.get('format', {}).get('code'),
-                    status=item['status'],
-                    creator_id=item['creator']['id'],
-                    time_created=item['timeCreated'],
-                    time_modified=item['timeModified'],
-                    project_id=item['owningProjectId'],
-                    project_name=item['owningProjectName'],
-                    tags=item['tags']
+                    name=item['details']['name'],
+                    data_type=item['details']['dataType'],
+                    path=item['details']['path'],
+                    file_size=item['details'].get('fileSizeInBytes', 0),
+                    format=item['details'].get('format', {}).get('code'),
+                    status=item['details']['status'],
+                    creator_id=item['details']['creatorId'],
+                    time_created=item['details']['timeCreated'],
+                    time_modified=item['details']['timeModified'],
+                    project_id=item['details']['owningProjectId'],
+                    project_name=item['details']['owningProjectName'],
+                    tags=item['details']['tags']
                 )
                 for item in items_data
             ]
