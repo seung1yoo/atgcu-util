@@ -86,18 +86,18 @@ class DataManager:
             return [
                 ProjectData(
                     id=item['id'],
-                    name=item['details']['name'],
-                    data_type=item['details']['dataType'],
-                    path=item['details']['path'],
+                    name=item['details'].get('name', ''),
+                    data_type=item['details'].get('dataType', 'UNKNOWN'),
+                    path=item['details'].get('path', ''),
                     file_size=item['details'].get('fileSizeInBytes', 0),
                     format=item['details'].get('format', {}).get('code'),
-                    status=item['details']['status'],
-                    creator_id=item['details']['creatorId'],
-                    time_created=item['details']['timeCreated'],
-                    time_modified=item['details']['timeModified'],
-                    project_id=item['details']['owningProjectId'],
-                    project_name=item['details']['owningProjectName'],
-                    tags=item['details']['tags']
+                    status=item['details'].get('status', 'UNKNOWN'),
+                    creator_id=item['details'].get('creatorId', ''),
+                    time_created=item['details'].get('timeCreated', ''),
+                    time_modified=item['details'].get('timeModified', ''),
+                    project_id=item['details'].get('owningProjectId', ''),
+                    project_name=item['details'].get('owningProjectName', ''),
+                    tags=item['details'].get('tags', {'technicalTags': [], 'userTags': []})
                 )
                 for item in items_data
             ]
