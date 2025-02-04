@@ -25,7 +25,7 @@ setup(
     description="ICA (Illumina Connected Analytics) Data Management Package",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/ica-data-manager",
+    url="https://github.com/seung1yoo/atgcu-util/ica-data-manager",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
