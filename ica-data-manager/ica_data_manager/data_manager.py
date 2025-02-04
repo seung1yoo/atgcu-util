@@ -224,8 +224,7 @@ class DataManager:
             result = subprocess.run(
                 ['icav2', 'projectdata', 'download', 
                  '--project-id', project_id,
-                 file_data.id, './',
-                 '--output-file', output_path],
+                 file_data.id, output_path],
                 capture_output=True,
                 text=True,
                 check=True
