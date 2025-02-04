@@ -19,7 +19,7 @@ setup(
         ],
     },
     author="ATGCU",
-    author_email="your.email@example.com",
+    author_email="seung1.yoo@gmail.com",
     description="ICA (Illumina Connected Analytics) Data Management Package",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
@@ -30,5 +30,5 @@ setup(
         "Operating System :: OS Independent",
         "Topic :: Scientific/Engineering :: Bio-Informatics",
     ],
-    python_requires=">=3.8",
+    python_requires=">=3.10",
 ) 

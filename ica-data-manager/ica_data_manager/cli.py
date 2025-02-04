@@ -1,4 +1,3 @@
-"""ICA 데이터 관리 CLI 프로그램"""
 
 import click
 from typing import Optional

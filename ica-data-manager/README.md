@@ -4,7 +4,7 @@ Illumina Connected Analytics (ICA) 데이터 관리를 위한 Python 패키지�
 
 ## 요구사항
 
-- Python 3.8 이상
+- Python 3.10 이상
 - ICAv2 CLI ([설치 방법](https://help.ica.illumina.com/command-line-interface/cli-installation))
 
 ## 설치 방법
@@ -123,16 +123,14 @@ manager.download_fastq_files(
 
 1. 저장소 클론
 ```bash
-git clone https://github.com/yourusername/ica-data-manager.git
+git clone https://github.com/seung1yoo/atgcu-util/ica-data-manager.git
 cd ica-data-manager
 ```
 
 2. 가상환경 생성 및 활성화
 ```bash
-python -m venv venv
-source venv/bin/activate  # Linux/Mac
-# or
-.\venv\Scripts\activate  # Windows
+conda create -n ica-data-manager python=3.10
+conda activate ica-data-manager
 ```
 
 3. 개발 의존성 설치

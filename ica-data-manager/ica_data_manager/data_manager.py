@@ -1,4 +1,3 @@
-"""ICA 프로젝트 데이터 관리 모듈"""
 
 import subprocess
 from typing import List, Dict, Any, Optional, Tuple
