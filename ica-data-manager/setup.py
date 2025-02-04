@@ -10,7 +10,6 @@ setup(
         "pyyaml>=6.0",
         "requests>=2.28.0",
         "biopython>=1.80",      # For biological sequence handling
-        "icav2",                # ICA v2 CLI
         "tabulate>=0.9.0",      # For table formatting
         "click>=8.0.0",         # For CLI interface
     ],
