@@ -16,7 +16,7 @@ curl -L https://github.com/illumina/ica-cli/releases/latest/download/icav2 \
     chmod +x /usr/local/bin/icav2
 
 # 패키지 설치
-pip install ica-data-manager
+pip install .
 ```
 
 ## 주요 기능
